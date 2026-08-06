@@ -1,0 +1,28 @@
+FROM ruby:3.4.8
+
+# 環境変数の設定（コメントは行末ではなく行の上に書く）
+ENV LANG=C.UTF-8
+ENV TZ=Asia/Tokyo
+
+# 必要なパッケージのインストール
+RUN apt-get update -qq \
+ && apt-get install -y --no-install-recommends \
+      ca-certificates curl gnupg build-essential libpq-dev postgresql-client vim \
+ && install -d -m 0755 /etc/apt/keyrings \
+ && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key \
+      | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
+ && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" \
+      > /etc/apt/sources.list.d/nodesource.list \
+ && apt-get update -qq \
+ && apt-get install -y --no-install-recommends nodejs \
+ && npm install -g yarn \
+ && rm -rf /var/lib/apt/lists/*
+
+# アプリケーションディレクトリの作成
+WORKDIR /myapp
+
+# Bundlerのインストール
+RUN gem install bundler
+
+# アプリケーションのコードをコピー
+COPY . /myapp
