@@ -1,12 +1,12 @@
 services: # コンテナの定義開始
   db: # PostgreSQLデータベースの設定
-    image: postgres # PostgreSQLの公式イメージを使用
+    image: postgres:17 # PostgreSQLの公式イメージを使用
     restart: always # コンテナを常に再起動
     environment: # 環境変数の設定
       TZ: Asia/Tokyo # タイムゾーンを日本に設定
       POSTGRES_PASSWORD: password # データベースのパスワード設定
     volumes: # データの永続化設定
-      - postgresql_data:/var/lib/postgresql # DBデータを永続化
+      - postgresql_data:/var/lib/postgresql/data # DBデータを永続化
     ports: # ポート設定
       - 5432:5432
     healthcheck: # コンテナの健康チェック設定
