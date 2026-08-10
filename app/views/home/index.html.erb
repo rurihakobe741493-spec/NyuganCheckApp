@@ -3,7 +3,7 @@
   <nav>
     <ul class="flex space-x-4">
       <li><%= link_to "ホーム", root_path, class: "hover:underline" %></li>
-      <li><%= link_to "セルフチェック", '#', class: "hover:underline" %></li>
+      <li><%= link_to "セルフチェック", check_path, class: "hover:underline" %></li>
       <li><%= link_to "施設検索", '#', class: "hover:underline" %></li>
       <li><%= link_to "Q&A", '#', class: "hover:underline" %></li>
     </ul>
@@ -13,7 +13,7 @@
 <h1 class="text-4xl font-bold text-blue-600 underline">Tailwind OK</h1>
 <div class="mt-4 rounded-lg bg-gray-100 p-6 shadow">ビルドされています</div>
 
-<%= link_to "セルフチェック", '#', class: "mt-4 inline-block rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600" %>
+<%= link_to "セルフチェック", check_path, class: "mt-4 inline-block rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600" %>
 <%= link_to "施設検索", '#', class: "mt-4 inline-block rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600" %>
 <%= link_to "Q&A", '#', class: "mt-4 inline-block rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600" %>
 

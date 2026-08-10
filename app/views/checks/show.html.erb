@@ -1,0 +1,128 @@
+<%# 質問・選択肢・結果の文章はすべて仮 %>
+<%
+  symptoms = [
+    "しこり",
+    "分泌物（透明・乳白色を除く）",
+    "ただれ",
+    "えくぼ",
+    "ひきつれ",
+    "その他の乳房の変化"
+  ]
+
+  results = {
+    "result-symptom" => "乳腺外科の病院・クリニックを受診しましょう。",
+    "result-age"     => "検診施設で乳がん検診を受けましょう。",
+    "result-family"  => "遺伝性乳がんの可能性があります。",
+    "result-routine" => "2年に1回、検診施設で乳がん検診を受けましょう。"
+  }
+%>
+
+<div class="max-w-xl mx-auto p-6" data-controller="flowchart">
+
+  <%# ============ 質問A：セルフチェック ============ %>
+  <section data-flowchart-target="panel" data-panel="qa" class="hidden">
+    <h2 class="text-xl mb-2">セルフチェック</h2>
+    <p class="mb-4">現在ある症状にチェックを入れてください。</p>
+
+    <div class="space-y-2 mb-4">
+      <% symptoms.each do |symptom| %>
+        <label class="flex items-center gap-2">
+          <input type="checkbox"
+                 value="<%= symptom %>"
+                 data-flowchart-target="symptom"
+                 data-action="change->flowchart#clearNoSymptom">
+          <span><%= symptom %></span>
+        </label>
+      <% end %>
+
+      <label class="flex items-center gap-2">
+        <input type="checkbox"
+               data-flowchart-target="noSymptom"
+               data-action="change->flowchart#clearSymptoms">
+        <span>症状なし</span>
+      </label>
+    </div>
+
+    <button type="button"
+            class="border px-4 py-2 rounded"
+            data-action="click->flowchart#next">
+      次へ進む
+    </button>
+
+    <%= link_to "トップページにもどる", root_path, class: "border px-4 py-2 rounded" %>
+
+    <p data-flowchart-target="hint" class="hidden mt-2 text-sm">
+      1つ以上選んでください。
+    </p>
+  </section>
+
+  <%# ============ 質問B：年齢 ============ %>
+  <section data-flowchart-target="panel" data-panel="qb" class="hidden">
+    <h2 class="text-xl mb-2">年齢</h2>
+    <p class="mb-4">現在、40歳以上ですか？　40歳未満ですか？</p>
+
+    <div class="flex gap-3">
+      <button type="button"
+              class="border px-4 py-2 rounded"
+              data-action="click->flowchart#choose"
+              data-flowchart-next-param="result-age">
+        40歳以上
+      </button>
+      <button type="button"
+              class="border px-4 py-2 rounded"
+              data-action="click->flowchart#choose"
+              data-flowchart-next-param="qc">
+        40歳未満
+      </button>
+      <button type="button"
+              class="border px-4 py-2 rounded"
+              data-action="click->flowchart#restart">
+        最初からやり直す
+      </button>
+    </div>
+  </section>
+
+  <%# ============ 質問C：家族歴 ============ %>
+  <section data-flowchart-target="panel" data-panel="qc" class="hidden">
+    <h2 class="text-xl mb-2">家族歴</h2>
+    <p class="mb-4">ご家族（血縁者）に乳がんに罹った方はいますか？</p>
+
+    <div class="flex gap-3">
+      <button type="button"
+              class="border px-4 py-2 rounded"
+              data-action="click->flowchart#choose"
+              data-flowchart-next-param="result-family">
+        はい
+      </button>
+      <button type="button"
+              class="border px-4 py-2 rounded"
+              data-action="click->flowchart#choose"
+              data-flowchart-next-param="result-routine">
+        いいえ
+      </button>
+      <button type="button"
+              class="border px-4 py-2 rounded"
+              data-action="click->flowchart#restart">
+        最初からやり直す
+      </button>
+    </div>
+  </section>
+
+  <%# ============ 結果パネル（4種類とも同じ形） ============ %>
+  <% results.each do |name, message| %>
+    <section data-flowchart-target="panel" data-panel="<%= name %>" class="hidden">
+      <p class="text-lg mb-6"><%= message %></p>
+
+      <div class="flex gap-3">
+        <%# 施設検索のルートを作ったら "#" を facilities_path に差し替える %>
+        <%= link_to "施設を探す", "#", class: "border px-4 py-2 rounded" %>
+        <button type="button"
+                class="border px-4 py-2 rounded"
+                data-action="click->flowchart#restart">
+          最初からやり直す
+        </button>
+      </div>
+    </section>
+  <% end %>
+
+</div>

@@ -4,5 +4,8 @@
 
 import { application } from "./application"
 
+import FlowchartController from "./flowchart_controller"
+application.register("flowchart", FlowchartController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
