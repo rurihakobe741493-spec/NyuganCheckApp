@@ -1,0 +1,38 @@
+<h1 class="text-2xl font-bold text-gray-900">施設を探す</h1>
+
+<p class="mt-4 leading-relaxed text-gray-700">
+  今のご状況によって、探すべき施設が変わります。近いものをお選びください。
+</p>
+
+<div class="mt-6 space-y-4">
+  <%= link_to facilities_path(purpose: "treatment"),
+        class: "block rounded-lg border-l-4 border-amber-400 bg-amber-50 p-5 hover:bg-amber-100" do %>
+    <p class="font-bold text-gray-900">しこりなど、気になる症状がある</p>
+    <p class="mt-1 text-sm leading-relaxed text-gray-700">
+      検診ではなく、乳腺外科などで診療として受診する必要があります。
+    </p>
+  <% end %>
+
+  <%= link_to facilities_path(purpose: "screening"),
+        class: "block rounded-lg border border-pink-200 bg-pink-50 p-5 hover:bg-pink-100" do %>
+    <p class="font-bold text-gray-900">症状はなく、乳がん検診を受けたい</p>
+    <p class="mt-1 text-sm leading-relaxed text-gray-700">
+      マンモグラフィの撮影・読影の体制が整った検診施設を探せます。
+    </p>
+  <% end %>
+
+  <%= link_to facilities_path(purpose: "hboc"),
+        class: "block rounded-lg border border-gray-200 bg-gray-50 p-5 hover:bg-gray-100" do %>
+    <p class="font-bold text-gray-900">家族に乳がん・卵巣がんの人がいる</p>
+    <p class="mt-1 text-sm leading-relaxed text-gray-700">
+      遺伝的な要因について相談できる施設があります。
+    </p>
+  <% end %>
+</div>
+
+<div class="mt-8 rounded-lg bg-gray-50 p-5">
+  <p class="leading-relaxed text-gray-700">どれに当てはまるかわからない場合は、質問に答えると案内先が決まります。</p>
+  <p class="mt-3">
+    <%= link_to "3つの質問でチェックする →", check_path, class: "font-bold text-pink-700 underline" %>
+  </p>
+</div>

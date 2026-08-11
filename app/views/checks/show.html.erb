@@ -108,21 +108,24 @@
     </div>
   </section>
 
-  <%# ============ 結果パネル（4種類とも同じ形） ============ %>
-  <% results.each do |name, message| %>
-    <section data-flowchart-target="panel" data-panel="<%= name %>" class="hidden">
-      <p class="text-lg mb-6"><%= message %></p>
-
-      <div class="flex gap-3">
-        <%# 施設検索のルートを作ったら "#" を facilities_path に差し替える %>
-        <%= link_to "施設を探す", "#", class: "border px-4 py-2 rounded" %>
-        <button type="button"
-                class="border px-4 py-2 rounded"
-                data-action="click->flowchart#restart">
-          最初からやり直す
-        </button>
-      </div>
-    </section>
-  <% end %>
-
+  <%# ============ 結果パネル ============ %>
+  <section data-flowchart-target="panel" data-panel="result-symptom" class="hidden">
+    <h2>乳腺外科の病院・クリニックを受診しましょう</h2>
+    <%= render "result_actions", purpose: "treatment", label: "乳腺外科の施設を探す" %>
+  </section>
+  
+  <section data-flowchart-target="panel" data-panel="result-age" class="hidden">
+    <h2>検診施設で乳がん検診を受けましょう</h2>
+    <%= render "result_actions", purpose: "screening", label: "検診施設を探す" %>
+  </section>
+  
+  <section data-flowchart-target="panel" data-panel="result-routine" class="hidden">
+    <h2>2年に1回、検診施設で乳がん検診を受けましょう</h2>
+    <%= render "result_actions", purpose: "screening", label: "検診施設を探す" %>
+  </section>
+  
+  <section data-flowchart-target="panel" data-panel="result-family" class="hidden">
+    <h2>遺伝性乳がんの可能性があります</h2>
+    <%= render "result_actions", purpose: "hboc", label: "相談先について知る" %>
+  </section>
 </div>

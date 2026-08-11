@@ -1,0 +1,17 @@
+<div class="mx-auto max-w-2xl px-4 py-8">
+  <%= render partial: @purpose %>
+
+  <hr class="my-8 border-gray-200">
+
+  <p class="text-xs leading-relaxed text-gray-500">
+    このページは受診先を探すための情報提供を目的としたもので、診断を行うものではありません。
+    リンク先の情報は各団体が管理しているため、最新の内容は各サイトでご確認ください。
+    気になる症状がある場合は、このページの内容にかかわらず早めに医療機関を受診してください。
+  </p>
+
+  <% if @purpose != "guide" %>
+    <div class="mt-6 text-sm">
+      <%= link_to "← 他の選択肢を見る", facilities_path, class: "text-pink-700 underline" %>
+    </div>
+  <% end %>
+</div>
