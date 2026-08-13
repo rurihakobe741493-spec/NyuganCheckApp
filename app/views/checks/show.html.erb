@@ -1,20 +1,13 @@
 <%# 質問・選択肢・結果の文章はすべて仮 %>
 <%
   symptoms = [
-    "しこり",
-    "分泌物（透明・乳白色を除く）",
-    "ただれ",
-    "えくぼ",
-    "ひきつれ",
-    "その他の乳房の変化"
+    "しこりがある",
+    "乳首から液体が出る（母乳を除く）",
+    "乳首がへこんだ・ただれている",
+    "皮膚にくぼみやひきつれがある",
+    "脇の下にしこりや腫れがある",
+    "そのほか、いつもと違う変化がある"
   ]
-
-  results = {
-    "result-symptom" => "乳腺外科の病院・クリニックを受診しましょう。",
-    "result-age"     => "検診施設で乳がん検診を受けましょう。",
-    "result-family"  => "遺伝性乳がんの可能性があります。",
-    "result-routine" => "2年に1回、検診施設で乳がん検診を受けましょう。"
-  }
 %>
 
 <div class="max-w-xl mx-auto p-6" data-controller="flowchart">
@@ -22,7 +15,7 @@
   <%# ============ 質問A：セルフチェック ============ %>
   <section data-flowchart-target="panel" data-panel="qa" class="hidden">
     <h2 class="text-xl mb-2">セルフチェック</h2>
-    <p class="mb-4">現在ある症状にチェックを入れてください。</p>
+    <p class="mb-4">いま気になっている乳房の変化があれば、選んでください。</p>
 
     <div class="space-y-2 mb-4">
       <% symptoms.each do |symptom| %>
@@ -39,7 +32,7 @@
         <input type="checkbox"
                data-flowchart-target="noSymptom"
                data-action="change->flowchart#clearSymptoms">
-        <span>症状なし</span>
+        <span>気になる変化はない</span>
       </label>
     </div>
 
@@ -110,22 +103,27 @@
 
   <%# ============ 結果パネル ============ %>
   <section data-flowchart-target="panel" data-panel="result-symptom" class="hidden">
-    <h2>乳腺外科の病院・クリニックを受診しましょう</h2>
-    <%= render "result_actions", purpose: "treatment", label: "乳腺外科の施設を探す" %>
+    <h2>乳腺外科のある医療機関を受診しましょう</h2>
+    <%= render "result_actions", purpose: "treatment", qa_item: "palpation-lump" %>
   </section>
   
   <section data-flowchart-target="panel" data-panel="result-age" class="hidden">
-    <h2>検診施設で乳がん検診を受けましょう</h2>
-    <%= render "result_actions", purpose: "screening", label: "検診施設を探す" %>
+    <h2>乳がん検診を受けましょう</h2>
+    <%= render "result_actions", purpose: "screening", qa_item: "disease-age" %>
   </section>
   
   <section data-flowchart-target="panel" data-panel="result-routine" class="hidden">
-    <h2>2年に1回、検診施設で乳がん検診を受けましょう</h2>
-    <%= render "result_actions", purpose: "screening", label: "検診施設を探す" %>
+    <h2>いまは、ふだんの気づきを大切に</h2>
+    <p>
+      ふだんから自分の乳房の状態を知っておき、いつもと違うと感じたら、
+      年齢に関係なく乳腺外科のある医療機関を受診してください。
+      40歳になったら、2年に1度の乳がん検診を受けましょう。
+    </p>
+    <%= render "result_actions", purpose: "screening", qa_item: "palpation-awareness" %>
   </section>
   
   <section data-flowchart-target="panel" data-panel="result-family" class="hidden">
-    <h2>遺伝性乳がんの可能性があります</h2>
-    <%= render "result_actions", purpose: "hboc", label: "相談先について知る" %>
+    <h2>乳腺外科で一度相談してみることをおすすめします</h2>
+    <%= render "result_actions", purpose: "hboc", qa_item: "other-family-history" %>
   </section>
 </div>

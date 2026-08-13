@@ -1,0 +1,49 @@
+<p>
+  気になる症状があるときは、このページを読むより先に医療機関を受診してください。
+  <%= link_to "受診先を探す", facilities_path(purpose: "treatment") %>
+</p>
+
+<nav>
+  <% QaItem::CATEGORIES.each do |value, label| %>
+    <%= link_to label, qa_path(category: value),
+                class: ("current" if @category == value),
+                "aria-current": ("page" if @category == value) %>
+  <% end %>
+</nav>
+
+<% if @items.empty? %>
+  <p>このカテゴリの質問は準備中です。</p>
+  <%= link_to "すべての質問を見る", qa_path %>
+<% else %>
+  <% @items.each do |item| %>
+    <details id="<%= item.id %>" <%= "open" if params[:open] == item.id %>>
+      <summary><%= item.question %></summary>
+      <%= simple_format(item.body) %>
+      <p>
+        最終更新 <%= item.updated_on %>
+        <% if item.sources.any? %>／出典 <%= item.sources.join("、") %><% end %>
+      </p>
+    </details>
+  <% end %>
+<% end %>
+
+<nav>
+  <%= link_to "診断を試してみる", check_path %>
+  <%= link_to "施設を探す", facilities_path %>
+</nav>
+
+<footer class="text-xs leading-relaxed text-gray-500">
+  <p>
+    このページの内容は、乳がんの検査や検診について一般的な情報をまとめたものです。
+    個々の症状や状態についての診断・助言ではありません。
+    判断に迷うことがあれば、医療機関にご相談ください。
+  </p>
+  <p>
+    内容は掲載時点の情報に基づいています。統計や指針は更新されることがあるため、
+    最新の情報は各項目に記載した出典元でご確認ください。
+  </p>
+  <p>
+    一部の項目には、医療現場での経験に基づく内容を含みます。
+    施設によって運用が異なる場合があるため、詳細は受診先にご確認ください。
+  </p>
+</footer>

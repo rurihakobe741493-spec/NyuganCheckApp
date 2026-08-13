@@ -5,17 +5,14 @@
       <li><%= link_to "ホーム", root_path, class: "hover:underline" %></li>
       <li><%= link_to "セルフチェック", check_path, class: "hover:underline" %></li>
       <li><%= link_to "施設検索", facilities_path, class: "hover:underline" %></li>
-      <li><%= link_to "Q&A", '#', class: "hover:underline" %></li>
+      <li><%= link_to "Q&A", qa_path, class: "hover:underline" %></li>
     </ul>
   </nav>
 </header>
 
-<h1 class="text-4xl font-bold text-blue-600 underline">Tailwind OK</h1>
-<div class="mt-4 rounded-lg bg-gray-100 p-6 shadow">ビルドされています</div>
-
 <%= link_to "セルフチェック", check_path, class: "mt-4 inline-block rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600" %>
 <%= link_to "施設検索", facilities_path, class: "mt-4 inline-block rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600" %>
-<%= link_to "Q&A", '#', class: "mt-4 inline-block rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600" %>
+<%= link_to "Q&A", qa_path, class: "mt-4 inline-block rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600" %>
 
 <p>乳がんとは</p>
 

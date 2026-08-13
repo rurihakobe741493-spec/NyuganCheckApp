@@ -1,10 +1,12 @@
-<%# locals: (purpose:, label:) %>
+<%# locals: (purpose:, qa_item:) %>
 <div class="mt-6 flex gap-3">
-  <%= link_to label, facilities_path(purpose: purpose),
+  <%= link_to "施設を探す", facilities_path(purpose: purpose),
         class: "rounded bg-pink-700 px-4 py-2 font-bold text-white hover:bg-pink-800" %>
   <button type="button"
           class="rounded border px-4 py-2"
           data-action="click->flowchart#restart">
     最初からやり直す
   </button>
+  <%= link_to "よくある質問を読む", qa_item_path(qa_item),
+        class:"rounded border px-4 py-2" %>
 </div>
