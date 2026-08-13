@@ -1,21 +1,71 @@
-<header class="bg-blue-500 p-4 text-white">
-  <h1 class="text-2xl font-bold">Nyugan Check App</h1>
-  <nav>
-    <ul class="flex space-x-4">
-      <li><%= link_to "ホーム", root_path, class: "hover:underline" %></li>
-      <li><%= link_to "セルフチェック", check_path, class: "hover:underline" %></li>
-      <li><%= link_to "施設検索", facilities_path, class: "hover:underline" %></li>
-      <li><%= link_to "Q&A", qa_path, class: "hover:underline" %></li>
-    </ul>
-  </nav>
-</header>
+<% content_for :title, "Nyugan Check App｜乳がんの受診・検診の目安をチェック" %>
 
-<%= link_to "セルフチェック", check_path, class: "mt-4 inline-block rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600" %>
-<%= link_to "施設検索", facilities_path, class: "mt-4 inline-block rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600" %>
-<%= link_to "Q&A", qa_path, class: "mt-4 inline-block rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600" %>
+<!-- Hero Section with Tools integrated -->
+<section class="relative w-full min-h-[90vh] flex flex-col items-center justify-center overflow-hidden py-xl">
+  <div class="relative z-20 w-full px-margin-mobile md:px-lg max-w-7xl mx-auto flex flex-col items-center">
+    <div class="text-center mb-12">
+      <h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-6 drop-shadow-sm">
+        一人で悩まず、まずはチェックから。
+      </h1>
+      <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+        気になる変化があるときも、検診を受けようか迷っているときも。
+        いくつかの質問に答えると、次に何をすればよいかがわかります。
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
+      <!-- Feature 1 -->
+      <div class="group bg-surface-container-lowest/90 backdrop-blur-md rounded-xl border border-outline-variant/30 p-8 hover:border-primary/50 transition-all hover:shadow-lg flex flex-col h-full cursor-pointer relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-primary-container/10 rounded-bl-full -mr-16 -mt-16 transition-transform group-hover:scale-110"></div>
+        <div class="mb-6 relative z-10 text-primary">
+          <span class="material-symbols-outlined" data-icon="account_tree" style="font-size: 40px;">account_tree</span>
+        </div>
+        <h3 class="font-headline-sm text-headline-sm text-on-surface mb-3 relative z-10">受診・検診の目安</h3>
+        <p class="font-body-md text-body-md text-on-surface-variant mb-8 flex-grow relative z-10">
+          気になる変化の有無、年齢、家族の病歴についてお聞きします。答えに応じて、医療機関を受診する・検診を受ける・相談するなど、次にとるとよい行動をお伝えします。
+        </p>
+        <%= link_to check_path, class: "self-start mt-auto flex items-center gap-2 font-label-md text-label-md text-primary bg-primary-container/20 hover:bg-primary-container/40 px-4 py-2 rounded-lg transition-colors relative z-10" do %>
+          チェックを始める <span class="material-symbols-outlined" data-icon="arrow_forward" style="font-size: 16px;">arrow_forward</span>
+        <% end %>
+      </div>
+      <!-- Feature 2 -->
+      <div class="group bg-surface-container-lowest/90 backdrop-blur-md rounded-xl border border-outline-variant/30 p-8 hover:border-secondary/50 transition-all hover:shadow-lg flex flex-col h-full cursor-pointer relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-secondary-container/20 rounded-bl-full -mr-16 -mt-16 transition-transform group-hover:scale-110"></div>
+        <div class="mb-6 relative z-10 text-secondary">
+          <span class="material-symbols-outlined" data-icon="local_hospital" style="font-size: 40px;">local_hospital</span>
+        </div>
+        <h3 class="font-headline-sm text-headline-sm text-on-surface mb-3 relative z-10">施設検索</h3>
+        <p class="font-body-md text-body-md text-on-surface-variant mb-8 flex-grow relative z-10">
+          乳腺外科の受診、乳がん検診、遺伝性乳がんの相談など、目的に合わせて医療機関の探し方を案内します。
+        </p>
+        <%= link_to facilities_path, class: "self-start mt-auto flex items-center gap-2 font-label-md text-label-md text-secondary bg-secondary-container/20 hover:bg-secondary-container/40 px-4 py-2 rounded-lg transition-colors relative z-10" do %>
+          施設を探す <span class="material-symbols-outlined" data-icon="search" style="font-size: 16px;">search</span>
+        <% end %>
+      </div>
+      <!-- Feature 3 -->
+      <div class="group bg-surface-container-lowest/90 backdrop-blur-md rounded-xl border border-outline-variant/30 p-8 hover:border-tertiary/50 transition-all hover:shadow-lg flex flex-col h-full cursor-pointer relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-tertiary-container/20 rounded-bl-full -mr-16 -mt-16 transition-transform group-hover:scale-110"></div>
+        <div class="mb-6 relative z-10 text-tertiary">
+          <span class="material-symbols-outlined" data-icon="quiz" style="font-size: 40px;">quiz</span>
+        </div>
+        <h3 class="font-headline-sm text-headline-sm text-on-surface mb-3 relative z-10">Q&amp;A</h3>
+        <p class="font-body-md text-body-md text-on-surface-variant mb-8 flex-grow relative z-10">
+          マンモグラフィは痛いのか、費用はどのくらいか、要精密検査と言われたらどうなるか。検診や乳がんについての疑問を、カテゴリ別にまとめています。
+        </p>
+        <%= link_to qa_path, class: "self-start mt-auto flex items-center gap-2 font-label-md text-label-md text-tertiary bg-tertiary-container/20 hover:bg-tertiary-container/40 px-4 py-2 rounded-lg transition-colors relative z-10" do %>
+          Q&amp;Aを見る <span class="material-symbols-outlined" data-icon="article" style="font-size: 16px;">article</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Introduction Section -->
+<section class="py-xl px-margin-mobile md:px-lg max-w-5xl mx-auto">
+  <div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 p-8 md:p-12 text-center">
+    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-surface-container mb-6 text-secondary">
+      <span class="material-symbols-outlined" data-icon="medical_information" style="font-size: 32px;">medical_information</span>
+    </div>
+    <h2 class="font-headline-md text-headline-md text-on-surface mb-4">乳がんとは</h2>
+    <p class="font-body-md text-body-md text-on-surface-variant max-w-3xl mx-auto text-left md:text-center">乳がんは、母乳をつくる小葉や、母乳を運ぶ乳管の細胞から発生するがんです。日本の女性が新たに診断されるがんのなかで、最も多いがんです。<br><br>早く見つかるほど、治療の成績はよくなります。そのために大切なのは、ふだんの自分の乳房の状態を知っておき、いつもと違う変化に気づいたら医療機関を受診すること。そして40歳になったら、2年に1度の乳がん検診を受けることです。<br><br>気になる変化があるときは、検診の時期を待たずに乳腺外科を受診してください。</p>
 
-<p>乳がんとは</p>
-
-<footer class="bg-gray-800 p-4 text-white">
-  <p>&copy; 2026 Nyugan Check App. All rights reserved.</p>
-</footer>
+  </div>
+</section>
