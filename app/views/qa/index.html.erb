@@ -1,49 +1,100 @@
-<p>
-  気になる症状があるときは、このページを読むより先に医療機関を受診してください。
-  <%= link_to "受診先を探す", facilities_path(purpose: "treatment") %>
-</p>
+<%
+  pill_base = "rounded-full px-6 py-2 text-label-lg transition-colors"
+  pill_on   = "#{pill_base} bg-primary-container text-on-primary-container shadow-xs"
+  pill_off  = "#{pill_base} border border-outline-variant/30 bg-surface-container-highest text-on-surface hover:bg-surface-container-high"
+%>
 
-<nav>
-  <% QaItem::CATEGORIES.each do |value, label| %>
-    <%= link_to label, qa_path(category: value),
-                class: ("current" if @category == value),
-                "aria-current": ("page" if @category == value) %>
-  <% end %>
-</nav>
+<div class="mx-auto max-w-4xl px-5 pt-16 pb-16 md:px-10">
 
-<% if @items.empty? %>
-  <p>このカテゴリの質問は準備中です。</p>
-  <%= link_to "すべての質問を見る", qa_path %>
-<% else %>
-  <% @items.each do |item| %>
-    <details id="<%= item.id %>" <%= "open" if params[:open] == item.id %>>
-      <summary><%= item.question %></summary>
-      <%= simple_format(item.body) %>
-      <p>
-        最終更新 <%= item.updated_on %>
-        <% if item.sources.any? %>／出典 <%= item.sources.join("、") %><% end %>
+  <h1 class="mb-6 text-center text-headline-lg-mobile text-primary md:text-headline-lg">Q&amp;A</h1>
+
+  <%# 受診導線。このページで最も強い情報なので囲みで目立たせる %>
+  <div class="mb-10 flex gap-4 rounded-xl border border-outline-variant/30 bg-primary-fixed/50 px-6 py-5">
+    <span class="material-symbols-outlined shrink-0 text-primary" style="font-size: 24px;">info</span>
+    <div>
+      <p class="text-body-md text-on-surface">
+        気になる症状があるときは、このページを読むより先に医療機関を受診してください。
       </p>
-    </details>
+      <%= link_to "受診先を探す", facilities_path(purpose: "treatment"),
+            class: "mt-3 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-label-lg text-on-primary transition-colors hover:bg-on-primary-fixed-variant" %>
+    </div>
+  </div>
+
+  <nav class="mb-10 flex flex-wrap justify-center gap-3" aria-label="カテゴリ">
+    <% QaItem::CATEGORIES.each do |value, label| %>
+      <%= link_to label, qa_path(category: value),
+            class: (@category == value ? pill_on : pill_off),
+            "aria-current": ("page" if @category == value) %>
+    <% end %>
+  </nav>
+
+  <% if @items.empty? %>
+    <div class="rounded-xl border border-outline-variant/30 bg-surface-container-lowest px-6 py-10 text-center">
+      <p class="text-body-md text-on-surface-variant">このカテゴリの質問は準備中です。</p>
+      <%= link_to "すべての質問を見る", qa_path,
+            class: "mt-4 inline-block text-label-lg text-primary underline underline-offset-4 hover:text-on-primary-fixed-variant" %>
+    </div>
+  <% else %>
+    <div class="space-y-3">
+      <% @items.each do |item| %>
+        <details id="<%= item.id %>" <%= "open" if params[:open] == item.id %>
+                 class="group scroll-mt-20 overflow-hidden rounded-xl border border-outline-variant/30 bg-surface-container-lowest shadow-xs transition-colors hover:border-primary/50">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary [&::-webkit-details-marker]:hidden">
+            <span class="flex flex-wrap items-center gap-3">
+              <% if @category == QaItem::DEFAULT_CATEGORY %>
+                <span class="inline-block rounded bg-surface-dim px-2 py-1 text-label-md text-on-surface-variant">
+                  <%= QaItem::CATEGORIES[item.category] %>
+                </span>
+              <% end %>
+              <span class="text-headline-sm text-on-surface transition-colors group-hover:text-primary">
+                <%= item.question %>
+              </span>
+            </span>
+            <span class="material-symbols-outlined shrink-0 text-outline transition-transform duration-300 group-open:rotate-180" style="font-size: 24px;">expand_more</span>
+          </summary>
+
+          <div class="border-t border-outline-variant/20 px-6 pt-4 pb-6">
+            <div class="space-y-4 text-body-md text-on-surface-variant">
+              <%= simple_format(item.body) %>
+            </div>
+            <p class="mt-6 text-label-md text-on-surface-variant">
+              最終更新 <%= item.updated_on %>
+              <% if item.sources.any? %>／出典 <%= item.sources.join("、") %><% end %>
+            </p>
+          </div>
+        </details>
+      <% end %>
+    </div>
   <% end %>
-<% end %>
 
-<nav>
-  <%= link_to "チェックを行う", check_path %>
-  <%= link_to "施設を探す", facilities_path %>
-</nav>
+  <nav class="mt-16 flex flex-wrap justify-center gap-4">
+    <%= link_to check_path,
+          class: "inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-label-lg text-on-primary transition-colors hover:bg-on-primary-fixed-variant" do %>
+      チェックを行う <span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
+    <% end %>
+    <%= link_to facilities_path,
+          class: "inline-flex items-center gap-2 rounded-lg border border-outline-variant/50 bg-surface-container-lowest px-6 py-3 text-label-lg text-primary transition-colors hover:bg-primary-container/20" do %>
+      施設を探す <span class="material-symbols-outlined" style="font-size: 16px;">search</span>
+    <% end %>
+  </nav>
 
-<footer class="text-xs leading-relaxed text-gray-500">
-  <p>
-    このページの内容は、乳がんの検査や検診について一般的な情報をまとめたものです。
-    個々の症状や状態についての診断・助言ではありません。
-    判断に迷うことがあれば、医療機関にご相談ください。
-  </p>
-  <p>
-    内容は掲載時点の情報に基づいています。統計や指針は更新されることがあるため、
-    最新の情報は各項目に記載した出典元でご確認ください。
-  </p>
-  <p>
-    一部の項目には、医療現場での経験に基づく内容を含みます。
-    施設によって運用が異なる場合があるため、詳細は受診先にご確認ください。
-  </p>
-</footer>
+  <section class="mt-16 rounded-xl border border-outline-variant/30 bg-surface-container-low px-6 py-6" aria-labelledby="qa-notes">
+    <h2 id="qa-notes" class="mb-3 text-label-lg text-on-surface">このページについて</h2>
+    <div class="space-y-3 text-label-md text-on-surface-variant">
+      <p>
+        このページの内容は、乳がんの検査や検診について一般的な情報をまとめたものです。
+        個々の症状や状態についての診断・助言ではありません。
+        判断に迷うことがあれば、医療機関にご相談ください。
+      </p>
+      <p>
+        内容は掲載時点の情報に基づいています。統計や指針は更新されることがあるため、
+        最新の情報は各項目に記載した出典元でご確認ください。
+      </p>
+      <p>
+        一部の項目には、医療現場での経験に基づく内容を含みます。
+        施設によって運用が異なる場合があるため、詳細は受診先にご確認ください。
+      </p>
+    </div>
+  </section>
+
+</div>
