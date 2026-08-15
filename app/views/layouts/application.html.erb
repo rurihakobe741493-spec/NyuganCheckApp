@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Myapp" %></title>
+    <title><%= content_for(:title) || "Nyugan Check App" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 
     <%= yield :head %>
 
@@ -17,7 +22,40 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="bg-surface text-on-surface font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container">
+    <!-- TopAppBar -->
+    <header class="docked full-width top-0 sticky z-50 border-b border-outline-variant/30 dark:border-outline/20 bg-surface/80 dark:bg-inverse-surface/80 backdrop-blur-md flat no shadows">
+      <div class="flex justify-between items-center h-16 px-margin-mobile md:px-lg max-w-7xl mx-auto">
+        <div class="flex items-center gap-4">
+          <%= link_to "Nyugan Check App", root_path, class: "text-headline-md font-headline-lg text-primary dark:text-inverse-primary tracking-tight" %>
+        </div>
+        <nav class="hidden md:flex items-center gap-8 font-label-lg text-label-lg">
+          <%= link_to "チェック", check_path, class: "text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-primary-container/20 dark:hover:bg-primary-fixed-dim/10 rounded-lg px-3 py-2" %>
+          <%= link_to "施設検索", facilities_path, class: "text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-primary-container/20 dark:hover:bg-primary-fixed-dim/10 rounded-lg px-3 py-2" %>
+          <%= link_to "Q&A", qa_path, class: "text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-primary-container/20 dark:hover:bg-primary-fixed-dim/10 rounded-lg px-3 py-2" %>
+        </nav>
+        <div class="flex items-center">
+
+        </div>
+      </div>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
+    <!-- Footer -->
+    <footer class="full-width py-xl mt-xl bg-surface-container-low dark:bg-inverse-surface flat no shadows">
+      <div class="flex flex-col gap-4 px-margin-mobile md:px-lg max-w-7xl mx-auto">
+        <%= link_to "Nyugan Check App", root_path, class: "text-headline-sm font-headline-sm text-primary dark:text-inverse-primary opacity-90 hover:opacity-100 transition-opacity" %>
+        <p class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant max-w-3xl">
+          このサイトは、乳がんについての一般的な情報を提供するものです。診断や治療の判断に代わるものではありません。気になる症状があるときは、医療機関を受診してください。
+        </p>
+        <p class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant max-w-3xl">
+          統計は国立がん研究センター がん情報サービス「がん統計」（2023年罹患データ）によります。
+        </p>
+        <p class="font-body-md text-body-md text-secondary dark:text-secondary-fixed">
+          © 2026 Nyugan Check App
+        </p>
+      </div>
+    </footer>
   </body>
 </html>
