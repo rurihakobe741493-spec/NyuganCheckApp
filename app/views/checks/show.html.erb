@@ -104,26 +104,50 @@
   <%# ============ 結果パネル ============ %>
   <section data-flowchart-target="panel" data-panel="result-symptom" class="hidden">
     <h2>乳腺外科のある医療機関を受診しましょう</h2>
+    <br>
+    <p>乳腺外科は乳房を専門にみる科で、マンモグラフィや超音波検査など、</p>
+    <p>必要な検査へそのまま進められます。</p>
+    <br>
+    <p>気になる症状がある場合は、次の検診の時期に関わらず</p>
+    <p>早めに受診することが大切です。</p>
+    <br>
+    <p>受診のときは「いつごろから」「左右どちらか」「変化しているか」を</p>
+    <p>伝えられると、そのあとの検査の段取りがスムーズに進みます。</p>
     <%= render "result_actions", purpose: "treatment", qa_item: "palpation-lump" %>
   </section>
   
   <section data-flowchart-target="panel" data-panel="result-age" class="hidden">
     <h2>乳がん検診を受けましょう</h2>
+    <br>
+    <p>国の方針では、乳がん検診は40歳から2年に1度、マンモグラフィで受けるよう推奨されています。</p>
+    <br>
+    <p>症状として現れる前の、乳がんにつながる変化を見つけるための検査で、</p>
+    <p>気になるところがなくても間隔をあけずに受けることに意味があります。</p>
+    <br>
+    <p>月経がある方は、月経前を避けて予約すると、検査時の痛みが和らぎやすくなります。</p>
     <%= render "result_actions", purpose: "screening", qa_item: "disease-age" %>
   </section>
   
   <section data-flowchart-target="panel" data-panel="result-routine" class="hidden">
     <h2>いまは、ふだんの気づきを大切に</h2>
-    <p>
-      ふだんから自分の乳房の状態を知っておき、いつもと違うと感じたら、
-      年齢に関係なく乳腺外科のある医療機関を受診してください。
-      40歳になったら、2年に1度の乳がん検診を受けましょう。
-    </p>
+    <br>
+    <p>ふだんから自分の乳房の状態を知っておき、いつもと違うと感じたら、</p>
+    <p>年齢に関係なく乳腺外科のある医療機関を受診してください。</p>
+    <br>
+    <p>症状がない場合でも、40歳になったら、2年に1度の乳がん検診を受けましょう。</p>
     <%= render "result_actions", purpose: "screening", qa_item: "palpation-awareness" %>
   </section>
   
   <section data-flowchart-target="panel" data-panel="result-family" class="hidden">
     <h2>乳腺外科で一度相談してみることをおすすめします</h2>
+    <br>
+    <p>血縁者に乳がんや卵巣がんの方がいる場合、いつから・どのくらいの間隔で</p>
+    <p>検査を受けるとよいかは、一人ひとり異なります。</p>
+    <br>
+    <p>乳腺外科では、家族の状況を含めて相談できます。</p>
+    <br>
+    <p>乳がんの多くは遺伝によるものではありませんが、</p>
+    <p>家族に複数の方がいる場合などは、遺伝について相談できる外来もあります。</p>
     <%= render "result_actions", purpose: "hboc", qa_item: "other-family-history" %>
   </section>
 </div>
